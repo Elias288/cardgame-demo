@@ -58,7 +58,6 @@ export class NewGameComponent implements OnInit, OnDestroy {
         }
         return user;
       });
-      console.log(this.users)
       this.filteredUsers = this.userControl.valueChanges.pipe(
         startWith<string | User[]>(""),
         map(value => (typeof value === "string" ? value : this.lastFilter)),
@@ -68,7 +67,7 @@ export class NewGameComponent implements OnInit, OnDestroy {
     this.uuid = uuidv4();
     this.ws.connect(this.uuid).subscribe({
       next: (event: any) => {
-        if (event.type === 'cargame.juegocreado') {
+        if (event.type === 'cardgame.juegocreado') {
           this.router.navigate(['list']);
         }
       },
@@ -92,7 +91,6 @@ export class NewGameComponent implements OnInit, OnDestroy {
       jugadores,
       jugadorPrincipalId: this.authService.userData.uid
     }
-    alert('juego creado')
     return this.api.crearJuego(
       command
     ).subscribe();

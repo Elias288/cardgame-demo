@@ -44,11 +44,11 @@ export class ListGameComponent implements OnInit, OnDestroy {
               juegoId: id,
               tiempo: 80,
               jugadores: event.jugadorIds.map((it:any) => it.uuid) 
-          });
+          }).subscribe();
         }
 
         if(event.type == 'cardgame.rondacreada'){
-          this.router.navigate(['board/'+id]);
+          this.router.navigate(['board', id]);
         }
       },
       error: (err:any) => console.log(err),

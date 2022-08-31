@@ -45,11 +45,10 @@ export class AuthService {
   }
 
   googleAuth() {
-    return this.authLogin(new firebase.auth.GoogleAuthProvider()).then((res: any) => {
-      if (res) {
-        window.location.href = '/home'
-      }
-    });
+    return this.authLogin(new firebase.auth.GoogleAuthProvider())
+      .then((res: any) => {
+        if (res) window.location.href = '/home';
+      });
   }
 
   authLogin(provider: any) {
@@ -57,13 +56,14 @@ export class AuthService {
       .signInWithPopup(provider)
       .then((result: any) => {
         this.setUserData(result.user)
-        .then(() => {
+        .then((res) => {
+          console.log(res)
           return result.user
         })
         .catch((error: any) => {
           window.alert(error);
         });
-        
+        return localStorage.getItem('user')
       })
       .catch((error: any) => {
         window.alert(error);

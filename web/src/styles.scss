@@ -66,7 +66,7 @@ h6 {
   display: table;
   width: 100%;
   height: 100%;
-  background: #cfcfcf;
+  background: #12056d;
 }
 
 .displayTableCell {
@@ -74,11 +74,6 @@ h6 {
   vertical-align: middle;
   width: 100%;
   height: 100%;
-
-  h1 {
-    text-align: center;
-    margin-bottom: 5rem;
-  }
 }
 
 h3 {
@@ -95,8 +90,6 @@ h3 {
   overflow: hidden;
   -webkit-box-shadow: 0 0 4px 0 rgba(0, 0, 0, 0.04);
   box-shadow: 0 0 4px 0 rgba(0, 0, 0, 0.04);
-  border-radius: 2rem;
-  box-shadow: #686868 20px 20px 30px;
 }
 
 label {
@@ -151,8 +144,7 @@ label {
 }
 
 .displayTable .googleBtn {
-  background: #3fa500;
-  border-radius: .5rem;
+  background: #4dd5fe;
 }
 
 .displayTable .facebookBtn {
@@ -640,3 +632,5 @@ body .table thead th {
     display: none;
   }
 }
+html, body { height: 100%; }
+body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
