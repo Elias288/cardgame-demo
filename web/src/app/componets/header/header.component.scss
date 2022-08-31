@@ -1,0 +1,24 @@
+header {
+	background-color: black;
+	color: #fff;
+}
+
+ul {
+	list-style: none;
+	display: flex;
+	margin-top: 0;
+
+	li {
+		padding: .5rem;
+		cursor: pointer;
+
+		a {
+			padding: .5rem;
+			
+			&:hover{
+				background-color: grey;
+				color: #000;
+			}
+		}
+	}
+}

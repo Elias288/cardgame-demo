@@ -1,0 +1,11 @@
+.cartasDelJugador {
+	display: flex;
+	flex-direction: row;
+	width: 100%;
+    overflow: auto;
+
+	img {
+		width: 300px;
+		margin: 30px;
+	}
+}
