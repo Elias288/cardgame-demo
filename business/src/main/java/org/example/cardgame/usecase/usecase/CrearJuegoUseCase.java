@@ -7,6 +7,7 @@ import org.example.cardgame.domain.command.CrearJuegoCommand;
 import org.example.cardgame.domain.values.*;
 import org.example.cardgame.usecase.gateway.ListaDeCartaService;
 import org.example.cardgame.usecase.gateway.model.CartaMaestra;
+import org.springframework.beans.factory.annotation.Autowired;
 import reactor.core.publisher.Flux;
 import reactor.core.publisher.Mono;
 

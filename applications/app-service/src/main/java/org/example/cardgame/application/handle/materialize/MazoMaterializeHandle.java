@@ -1,9 +1,11 @@
 package org.example.cardgame.application.handle.materialize;
 
 import org.bson.Document;
+import org.example.cardgame.application.handle.model.JuegoListViewModel;
 import org.example.cardgame.application.handle.model.MazoViewModel;
 import org.example.cardgame.domain.events.CartaQuitadaDelMazo;
 import org.example.cardgame.domain.events.CartasAsignadasAJugador;
+import org.example.cardgame.domain.events.JuegoEliminado;
 import org.example.cardgame.domain.events.JugadorAgregado;
 
 import org.example.cardgame.domain.values.Carta;
@@ -35,7 +37,6 @@ public class MazoMaterializeHandle {
         this.template = template;
     }
 
-    //TODO: handle Jugador Agregado
     @EventListener
     public void handleJugadorAgregado(JugadorAgregado event) {
         var mazo = event.getMazo().value();
@@ -77,6 +78,11 @@ public class MazoMaterializeHandle {
     }
 
     @EventListener
+    public void handleJuegoEliminado(JuegoEliminado event){
+        template.findAllAndRemove(filterById(event.aggregateRootId()), JuegoListViewModel.class, COLLECTION_VIEW).collectList().block();
+    }
+
+    @EventListener
     public void handleCartasAsignadasAJugador(CartasAsignadasAJugador event){
         var query = filterByUidAndId(event.getGanadorId().value(), event.aggregateRootId());
         var data = new Update();
@@ -106,5 +112,9 @@ public class MazoMaterializeHandle {
         );
     }
 
-
+    private Query filterById(String juegoId) {
+        return new Query(
+                Criteria.where("juegoId").is(juegoId)
+        );
+    }
 }
