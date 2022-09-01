@@ -41,7 +41,7 @@ public class MazoMaterializeHandle {
         var mazo = event.getMazo().value();
         var data = new Document();
         var cartas = new ArrayList<>();
-        data.put("uid", event.getJuegoId().value());
+        data.put("uid", event.getJugadorId().value());
         data.put("juegoId", event.aggregateRootId());
         data.put("cantidad", mazo.cartas().size());
         data.put("fecha", Instant.now());

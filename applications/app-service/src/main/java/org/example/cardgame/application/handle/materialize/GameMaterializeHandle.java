@@ -47,8 +47,8 @@ public class GameMaterializeHandle {
     public void handleJugadorAgregado(JugadorAgregado event) {
         var data = new Update();
         data.set("fecha", Instant.now());
-        data.set("jugadores."+event.getJuegoId().value()+".alias", event.getAlias());
-        data.set("jugadores."+event.getJuegoId().value()+".jugadorId", event.getJuegoId().value());
+        data.set("jugadores."+event.getJugadorId().value()+".alias", event.getAlias());
+        data.set("jugadores."+event.getJugadorId().value()+".jugadorId", event.getJugadorId().value());
         data.inc("cantidadJugadores");
         template.updateFirst(getFilterByAggregateId(event), data, COLLECTION_VIEW).block();
     }

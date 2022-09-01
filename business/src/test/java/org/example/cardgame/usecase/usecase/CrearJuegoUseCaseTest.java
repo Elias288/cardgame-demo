@@ -49,17 +49,17 @@ import static org.mockito.Mockito.when;
                     .expectNextMatches(domainEvent -> {
                         var event = (JugadorAgregado) domainEvent;
                         assert event.getMazo().value().cantidad().equals(6);
-                        return event.getJuegoId().value().equals("FFFF") && event.getAlias().equals("Pablo");
+                        return event.getJugadorId().value().equals("FFFF") && event.getAlias().equals("Pablo");
                     })
                     .expectNextMatches(domainEvent -> {
                         var event = (JugadorAgregado) domainEvent;
                         assert event.getMazo().value().cantidad().equals(6);
-                        return event.getJuegoId().value().equals("GGGG") && event.getAlias().equals("Pedro");
+                        return event.getJugadorId().value().equals("GGGG") && event.getAlias().equals("Pedro");
                     })
                     .expectNextMatches(domainEvent -> {
                         var event = (JugadorAgregado) domainEvent;
                         assert event.getMazo().value().cantidad().equals(6);
-                        return event.getJuegoId().value().equals("HHHH") && event.getAlias().equals("Elias");
+                        return event.getJugadorId().value().equals("HHHH") && event.getAlias().equals("Elias");
                     })
                     .expectComplete()
                     .verify();
