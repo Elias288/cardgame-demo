@@ -2,54 +2,37 @@
 <br />
 <div class="container-fluid">
     <div class="row">
-
-       
         <main role="main" class="col-md-7 ml-sm-auto col-lg-9 px-4">
-
-            <div class="pb-2 mb-3 border-bottom">
-                <h1 class="h2">Cuenta Regresiva {{tiempo}}s</h1>
+            <div>
+                Id del Juego: #{{juegoId}}
+            </div>
+            <div>
+                <h2>Puntaje: {{puntaje}}</h2>
+            </div>
+            <div>
+                <h3>{{message}}</h3>
+            </div>
+            <div class="infoBar">
                 <h4>RONDA # {{numeroRonda}} Jugadores [{{jugadoresRonda}}/{{jugadoresTablero}}]</h4>
+                <h1 class="h2">Cuenta Regresiva {{tiempo}}s</h1>
                 <button mat-button (click)="iniciarRonda()" disabled="{{roundStarted}}" color="primary">
                    INICIAR
                 </button>
             </div>
-            <div class="inner-adjust" id="cartasDelTablero">
-                <mat-grid-list cols="6" rowHeight="1:2">
-                    <mat-grid-tile *ngFor="let card of cartasDelTablero">
-						<div class="m-2">
-							<div>
-								<img mat-card-image src="/assets/{{card.cartaId}}" />
-							</div>
-							<div>
-								Poder 10px
-							</div>
-						</div>
-                    </mat-grid-tile>
-                </mat-grid-list>
-            </div>
-        </main>
-
-
-        <!-- <div class="col-md-3 d-md-block sidebar-cards " id="cartasDelJugador">
-            <mat-grid-list cols="1" rowHeight="2:4">
-                <mat-grid-tile *ngFor="let card of cartasDelJugador" class="cartas">
-                    <div *ngIf="!card.estaOculta">
-                        <div >
+            <div class="cartasDelTablero">
+                <div *ngFor="let card of cartasDelTablero">
+                    <div class="carta">
+                        <div>
                             <img mat-card-image src="/assets/{{card.cartaId}}" />
                         </div>
                         <div>
                             Poder {{card.poder}}
                         </div>
-
-                        <div>
-                            <button mat-button (click)="poner(card.cartaId)" color="primary" disabled="{{!card.estaHabilitada}}">
-                                MOVER A TABLERO
-                            </button>
-                        </div>
                     </div>
-                </mat-grid-tile>
+                </div>
+            </div>
+        </main>
 
-            </mat-grid-list> -->
         <div class="cartasDelJugador">
             <div *ngFor="let card of cartasDelJugador" >
                 <div *ngIf="!card.estaOculta">
@@ -60,11 +43,9 @@
                         Poder {{card.poder}}
                     </div>
 
-                    <div>
-                        <button mat-button (click)="poner(card.cartaId)" color="primary" disabled="{{!card.estaHabilitada}}">
-                            MOVER A TABLERO
-                        </button>
-                    </div>
+                    <button mat-button (click)="poner(card.cartaId, card.poder)" color="primary" disabled="{{!roundStarted}}">
+                        MOVER A TABLERO
+                    </button>
                 </div>
             </div>
         </div>

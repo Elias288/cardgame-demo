@@ -1,10 +1,8 @@
 <app-header></app-header>
-<div class="container-fluid">
-  <div class="row">
-   
-
-      <main role="main" class="main">
-          <div class="inner-adjust">
+<div class="container">
+  <div>
+      <main>
+          <div class="card newGame">
 
               <div class="title">
                   <h1 class="h2">Crear Juego</h1>
@@ -36,7 +34,8 @@
                   </mat-list-item>
               </mat-list>
 
-              <button mat-stroked-button color="primary" (click)="crearJuego()">Crear Juego</button>
+              <button mat-stroked-button color="primary" (click)="crearJuego()" *ngIf="spin">Crear Juego</button>
+              <app-spinner [hidden]="spin"></app-spinner>
           </div>
       </main>
 

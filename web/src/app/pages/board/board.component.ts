@@ -22,7 +22,10 @@ export class BoardComponent implements OnInit {
   juegoId: string = "";
   uid: string = "";
   roundStarted:boolean = false;
-  
+
+  puntaje: number = 0;
+  message: string = "";
+
   constructor(
     public api: ApiService,
     public authService: AuthService,
@@ -51,6 +54,7 @@ export class BoardComponent implements OnInit {
 
       this.ws.connect(this.juegoId).subscribe({
         next: (event:any) => {
+
           if (event.type === 'cardgame.ponercartaentablero') {
             this.cartasDelTablero.push({
               cartaId: event.carta.cartaId.uuid,
@@ -67,13 +71,42 @@ export class BoardComponent implements OnInit {
             this.tiempo = event.tiempo;
           }
 
+          if (event.type === 'cardgame.rondacreada') {
+            this.tiempo = event.tiempo;
+            this.jugadoresRonda = event.ronda.jugadores.length
+            this.numeroRonda = event.ronda.numero
+          }
+
           if(event.type === 'cardgame.rondainiciada'){
             this.roundStarted = true;
           }
 
-          if(event.type === 'cargame.rondaterminada'){
+          if(event.type === 'cardgame.rondaterminada'){
             this.roundStarted = false;
+            this.cartasDelTablero=[]
+
           }
+
+          if(event.type === 'cardgame.cartasasignadasajugador'){
+            if(event.ganadorId.uuid === this.uid){
+              event.cartasApuesta.forEach((carta: any) => {
+                this.cartasDelJugador.push({
+                  cartaId: carta.cartaId.uuid,
+                  poder: carta.poder,
+                  estaOculta: carta.estaOculta,
+                  estaHabilitada: carta.estaHabilitada
+                });
+              });
+              //SETEAR PUNTOS AL USUARIO
+              this.puntaje+=event.puntos
+              this.authService.setUserPuntos(JSON.parse(localStorage.getItem('user')!).uid, this.puntaje)
+              
+              this.message = "Ganaste " + event.puntos + " puntaje";
+            }else{
+              this.message = "perdiste"
+            }
+          }
+
         },
         error: (err:any) => console.log(err),
         complete: () => console.log('complete')
@@ -85,15 +118,18 @@ export class BoardComponent implements OnInit {
     this.ws.close();
   }
 
-  poner(cartaId: string) {
-    this.api.ponerCarta({
-      cartaId: cartaId,
-      juegoId: this.juegoId,
-      jugadorId: this.uid
-    }).subscribe();
+  poner(cartaId: string, poder: number) {
+    if(this.roundStarted){
+      this.api.ponerCarta({
+        cartaId: cartaId,
+        juegoId: this.juegoId,
+        jugadorId: this.uid
+      }).subscribe();
+    }
   }
 
   iniciarRonda(){
+    this.message = ""
     this.api.iniciarRonda({
       juegoId: this.juegoId,
     }).subscribe();

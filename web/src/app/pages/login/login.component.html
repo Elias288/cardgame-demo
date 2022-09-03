@@ -1,16 +1,19 @@
-<div class="displayTable">
-  <div class="displayTableCell">
+<div class="base">
+  <div class="container">
+    <div class="card Login">
       <h1>Card Game</h1>
       <div class="authBlock">
         <h3>Sign In</h3>
-  
+    
         <div class="formGroup">
-          <button type="button" class="btn googleBtn" (click)="auth.googleAuth()">
+          <button type="button" class="btn googleBtn" (click)="login()" *ngIf="spin">
             <i class="fab fa-google-plus-g"></i>
             Login con Google
           </button>
+          <app-spinner [hidden]="spin"></app-spinner>
         </div>
-  
+    
       </div>
     </div>
   </div>
+</div>

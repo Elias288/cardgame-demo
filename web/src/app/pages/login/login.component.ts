@@ -9,9 +9,15 @@ import { AuthService } from 'src/app/shared/services/auth.service';
 })
 export class LoginComponent implements OnInit {
 
+  spin: boolean = true;
+
   constructor(public auth: AuthService) { }
 
   ngOnInit(): void {
   }
 
+  login() {
+    this.spin=false
+    this.auth.googleAuth()
+  }
 }

@@ -33,6 +33,7 @@ import { MatTableModule } from '@angular/material/table'
 import { MatInputModule } from '@angular/material/input'
 import { FormsModule } from '@angular/forms';
 import { MatGridListModule } from '@angular/material/grid-list';
+import { SpinnerComponent } from './componets/spinner/spinner.component';
 
 @NgModule({
   declarations: [
@@ -42,7 +43,8 @@ import { MatGridListModule } from '@angular/material/grid-list';
     BoardComponent,
     HomeComponent,
     LoginComponent,
-    HeaderComponent
+    HeaderComponent,
+    SpinnerComponent
   ],
   imports: [
     BrowserModule,

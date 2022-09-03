@@ -1,10 +1,15 @@
 <header *ngIf="isLogged">
 	<div>
 		<nav>
-			<ul>
+			<ul class="actions">
 				<li><a (click)="inicio()">Inicio</a></li>
 				<li><a (click)="newGame()">New Game</a></li>
 				<li><a (click)="list()">List Games</a></li>
+			</ul>
+			<ul class="info">
+				<li>Puntaje: {{puntaje}}</li>
+				<li><img src="{{user.photoURL}}" alt="" srcset=""></li>
+				<li>{{user.displayName}}</li>
 				<li><a (click)="logout()">Logout</a></li>
 			</ul>
 		</nav>
