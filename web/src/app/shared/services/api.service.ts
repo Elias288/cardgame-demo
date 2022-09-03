@@ -6,6 +6,7 @@ import { map } from 'rxjs/operators';
 import { environment } from 'src/environments/environment';
 import { CrearJuegoCommand } from '../commands/crearJuegoCommand';
 import { CrearRondaCommand } from '../commands/crearRondaCommand';
+import { EliminarJuegoCommand } from '../commands/eliminarJuegoCommand';
 import { IniciarJuegoCommand } from '../commands/iniciarJuegoCommand';
 import { IniciarRondaCommand } from '../commands/iniciarRondaCommand';
 import { PonerCartaCommand } from '../commands/ponerCartaCommand';
@@ -25,6 +26,9 @@ export class ApiService {
     return this.http.post(environment.apiBase + '/juego/crear', command);
   }
 
+  eliminarJuego(command: EliminarJuegoCommand){
+    return this.http.post(environment.apiBase + '/juego/eliminar', command)
+  }
 
   getJugadores(): Observable<Jugador[]> {
     return this.afs.collection<User>(`users`).snapshotChanges().pipe(map((actions) => {
@@ -45,7 +49,7 @@ export class ApiService {
    }
 
   getTablero(juegoId: string): Observable<TableroModel> { 
-    return this.http.get<TableroModel>(environment.apiBase + '/juego/'+juegoId);
+    return this.http.get<TableroModel>(environment.apiBase + '/juego/tablero/'+juegoId);
   }
 
   ponerCarta(command: PonerCartaCommand){

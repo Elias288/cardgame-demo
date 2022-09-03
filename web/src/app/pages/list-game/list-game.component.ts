@@ -33,7 +33,8 @@ export class ListGameComponent implements OnInit, OnDestroy {
   }
 
   entrar(id: string) {
-    this.router.navigate(['board', id]);
+    if(id)
+      this.router.navigate(['board', id]);
   }
 
   iniciar(id: string) {
@@ -44,11 +45,11 @@ export class ListGameComponent implements OnInit, OnDestroy {
               juegoId: id,
               tiempo: 80,
               jugadores: event.jugadorIds.map((it:any) => it.uuid) 
-          });
+          }).subscribe();
         }
 
         if(event.type == 'cardgame.rondacreada'){
-          this.router.navigate(['board/'+id]);
+          this.router.navigate(['board', id]);
         }
       },
       error: (err:any) => console.log(err),
@@ -57,4 +58,16 @@ export class ListGameComponent implements OnInit, OnDestroy {
     this.api.iniciar({ juegoId: id }).subscribe();
   }
 
+  eliminar(id: string){
+    this.ws.connect(id).subscribe({
+      next: (event: any) => {
+        console.log(event)
+        if(event.type === 'cardgame.juegoeliminado'){
+          console.log(event.aggregateRootId)
+          this.dataSource = this.dataSource.filter((game) => game.id !== event.aggregateRootId)
+        }
+      }
+    })
+    this.api.eliminarJuego({ juegoId: id }).subscribe()
+  }
 }

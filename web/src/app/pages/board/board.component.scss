@@ -1,11 +1,72 @@
+.container-fluid {
+	width: 90%;
+    margin: auto;
+	
+	[role=main] {
+		padding: 0;
+	}
+}
+
+.infoBar {
+	display: flex;
+	align-items: center;
+    justify-content: space-between;
+    background: #247dc9;
+    padding: 0.3rem 0.5rem;
+	border-radius: 10px 10px 0 0;
+
+	* {
+		margin: 0;
+	}
+
+	> button {
+		background-color: #12e32b;
+	}
+}
+
+
+.cartasDelTablero{
+	background-color: black;
+	width: 100%;
+	padding: 3rem;
+	display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+	min-height: 300px;
+
+	.carta {
+		background: #fff;
+		width: min-content;
+		padding: 0.5rem;
+
+	}
+	img {
+		width: 100px;
+	}
+}
+
 .cartasDelJugador {
 	display: flex;
 	flex-direction: row;
 	width: 100%;
     overflow: auto;
+	background-color: #5a5a5a;
+    padding: 1.5rem 1rem;
+	
+	> * {
+		margin: 0 .5rem;
+
+		> * {
+			min-height: 280px;
+			background-color: #fff;
+			padding: 0 .5rem;
+			display: block;
+			text-align: center;
+			background-color: #fff;
+		} 
+	}
 
 	img {
-		width: 300px;
-		margin: 30px;
+		width: 150px;
 	}
 }

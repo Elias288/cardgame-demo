@@ -3,10 +3,21 @@ header {
 	color: #fff;
 }
 
+nav {
+	height: 60px;
+	display: flex;
+	flex-direction: row;
+    justify-content: space-between;
+    padding: 0.3rem 1.5rem;
+    align-items: center;
+}
+
 ul {
 	list-style: none;
 	display: flex;
-	margin-top: 0;
+	align-items: center;
+	margin: 0;
+	height: 100%;
 
 	li {
 		padding: .5rem;
@@ -20,5 +31,13 @@ ul {
 				color: #000;
 			}
 		}
+	}
+}
+
+.info {
+	img {
+		width: 35px;
+		height: 35px;
+		border-radius: 50%;
 	}
 }

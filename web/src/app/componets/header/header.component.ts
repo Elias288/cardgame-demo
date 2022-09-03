@@ -13,6 +13,8 @@ export class HeaderComponent implements OnInit {
   constructor(private router: Router, private authService: AuthService) { }
   
   isLogged: boolean = this.authService.isLoggedIn
+  user: any = JSON.parse(localStorage.getItem('user')!);
+  puntaje: number = +JSON.parse(localStorage.getItem('puntaje')!);
   
   ngOnInit(): void {
   }

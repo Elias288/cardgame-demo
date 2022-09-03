@@ -44,7 +44,7 @@ public class QueryHandle {
     @Bean
     public RouterFunction<ServerResponse> getTablero() {
         return route(
-                GET("/api/juego/{id}"),
+                GET("/api/juego/tablero/{id}"),
                 request -> template.findOne(filterById(request.pathVariable("id")), TableroViewModel.class, "gameview")
                         .flatMap(element -> ServerResponse.ok()
                                 .contentType(MediaType.APPLICATION_JSON)
@@ -63,18 +63,21 @@ public class QueryHandle {
         );
     }
 
+    //FILTRAR POR AUTH ID
     private Query filterByUId(String uid) {
         return new Query(
                 Criteria.where("uid").is(uid)
         );
     }
 
+    //FILTRAR POR _ID
     private Query filterById(String juegoId) {
         return new Query(
                 Criteria.where("_id").is(juegoId)
         );
     }
 
+    //FILTRAR POR AUTH ID Y JUEGO ID
     private Query filterByUidAndId(String uid, String juegoId) {
         return new Query(
                 Criteria.where("juegoId").is(juegoId).and("uid").is(uid)

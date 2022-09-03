@@ -38,6 +38,8 @@ export class NewGameComponent implements OnInit, OnDestroy {
   filteredUsers: Observable<User[]> | undefined;
   lastFilter: string = "";
 
+  spin: boolean = true;
+
   constructor(
     public afs: AngularFirestore,
     public api: ApiService,
@@ -58,7 +60,6 @@ export class NewGameComponent implements OnInit, OnDestroy {
         }
         return user;
       });
-      console.log(this.users)
       this.filteredUsers = this.userControl.valueChanges.pipe(
         startWith<string | User[]>(""),
         map(value => (typeof value === "string" ? value : this.lastFilter)),
@@ -68,7 +69,9 @@ export class NewGameComponent implements OnInit, OnDestroy {
     this.uuid = uuidv4();
     this.ws.connect(this.uuid).subscribe({
       next: (event: any) => {
-        if (event.type === 'cargame.juegocreado') {
+        if (event.type === 'cardgame.juegocreado') {
+          console.log('juegocreado')
+          this.spin = true;
           this.router.navigate(['list']);
         }
       },
@@ -83,6 +86,7 @@ export class NewGameComponent implements OnInit, OnDestroy {
 
 
   crearJuego() {
+    this.spin = false;
     const jugadores: any = {};
     this.selectedUsers.forEach(user => {
       jugadores[user.uid] = user.displayName;
@@ -92,7 +96,6 @@ export class NewGameComponent implements OnInit, OnDestroy {
       jugadores,
       jugadorPrincipalId: this.authService.userData.uid
     }
-    alert('juego creado')
     return this.api.crearJuego(
       command
     ).subscribe();

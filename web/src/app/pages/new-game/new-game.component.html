@@ -1,12 +1,10 @@
 <app-header></app-header>
-<div class="container-fluid">
-  <div class="row">
-   
+<div class="container">
+  <div>
+      <main>
+          <div class="card newGame">
 
-      <main role="main" class="col-md-9 ml-sm-auto col-lg-10 px-4">
-          <div class="inner-adjust">
-
-              <div class="pt-3 pb-2 mb-3 border-bottom">
+              <div class="title">
                   <h1 class="h2">Crear Juego</h1>
               </div>
               <p>Invite a los jugadores a participar del juego</p>
@@ -18,8 +16,8 @@
               <mat-autocomplete #auto="matAutocomplete" [displayWith]="displayFn">
                   <mat-option *ngFor="let user of filteredUsers | async" [value]="selectedUsers">
                       <div (click)="optionClicked($event, user)">
-                        <mat-checkbox [checked]="user.selected" (change)="toggleSelection(user)"
-                          (click)="$event.stopPropagation()">
+                        <mat-checkbox [checked]="user.selected" (change)="toggleSelection(user)" 
+                            (click)="$event.stopPropagation()">
                           {{ user.displayName }} [{{ user.email }}]
                         </mat-checkbox>
                       </div>
@@ -36,7 +34,8 @@
                   </mat-list-item>
               </mat-list>
 
-              <button mat-stroked-button color="primary" (click)="crearJuego()">Crear Juego</button>
+              <button mat-stroked-button color="primary" (click)="crearJuego()" *ngIf="spin">Crear Juego</button>
+              <app-spinner [hidden]="spin"></app-spinner>
           </div>
       </main>
 

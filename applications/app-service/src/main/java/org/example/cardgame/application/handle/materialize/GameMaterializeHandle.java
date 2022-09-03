@@ -4,6 +4,7 @@ import co.com.sofka.domain.generic.DomainEvent;
 
 import co.com.sofka.domain.generic.Identity;
 import org.bson.Document;
+import org.example.cardgame.application.handle.model.JuegoListViewModel;
 import org.example.cardgame.domain.events.*;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.context.event.EventListener;
@@ -47,8 +48,8 @@ public class GameMaterializeHandle {
     public void handleJugadorAgregado(JugadorAgregado event) {
         var data = new Update();
         data.set("fecha", Instant.now());
-        data.set("jugadores."+event.getJuegoId().value()+".alias", event.getAlias());
-        data.set("jugadores."+event.getJuegoId().value()+".jugadorId", event.getJuegoId().value());
+        data.set("jugadores."+event.getJugadorId().value()+".alias", event.getAlias());
+        data.set("jugadores."+event.getJugadorId().value()+".jugadorId", event.getJugadorId().value());
         data.inc("cantidadJugadores");
         template.updateFirst(getFilterByAggregateId(event), data, COLLECTION_VIEW).block();
     }
@@ -148,6 +149,10 @@ public class GameMaterializeHandle {
         template.updateFirst(getFilterByAggregateId(event),data, COLLECTION_VIEW).block();
     }
 
+    @EventListener
+    public void handleJuegoEliminado(JuegoEliminado event){
+        template.findAndRemove(getFilterByAggregateId(event), JuegoListViewModel.class, COLLECTION_VIEW).block();
+    }
 
     private Query getFilterByAggregateId(DomainEvent event) {
         return new Query(

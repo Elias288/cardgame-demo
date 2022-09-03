@@ -31,7 +31,7 @@ public class JugadorAgregado extends DomainEvent {
      *
      * @return the juego id
      */
-    public JugadorId getJuegoId() {
+    public JugadorId getJugadorId() {
         return identity;
     }
 
