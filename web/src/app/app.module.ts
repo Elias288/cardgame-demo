@@ -17,7 +17,6 @@ import {ApiService} from './shared/services/api.service';
 import { ListGameComponent } from './pages/list-game/list-game.component';
 import { BoardComponent } from './pages/board/board.component';
 import { HomeComponent } from './pages/home/home.component';
-import { LoginComponent } from './pages/login/login.component';
 import { HeaderComponent } from './componets/header/header.component'
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations'
 
@@ -33,7 +32,7 @@ import { MatTableModule } from '@angular/material/table'
 import { MatInputModule } from '@angular/material/input'
 import { FormsModule } from '@angular/forms';
 import { MatGridListModule } from '@angular/material/grid-list';
-import { SpinnerComponent } from './componets/spinner/spinner.component';
+import { LoginModule } from './modules/login/login.module';
 
 @NgModule({
   declarations: [
@@ -42,9 +41,7 @@ import { SpinnerComponent } from './componets/spinner/spinner.component';
     ListGameComponent,
     BoardComponent,
     HomeComponent,
-    LoginComponent,
-    HeaderComponent,
-    SpinnerComponent
+    HeaderComponent
   ],
   imports: [
     BrowserModule,
@@ -68,7 +65,8 @@ import { SpinnerComponent } from './componets/spinner/spinner.component';
     MatFormFieldModule,
     MatTableModule,
     MatInputModule,
-    MatGridListModule
+    MatGridListModule,
+    LoginModule
   ],
   providers: [ApiService],
   bootstrap: [AppComponent]
